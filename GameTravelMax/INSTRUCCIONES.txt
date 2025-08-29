@@ -1,0 +1,164 @@
+Resumen
+
+Jugador: se mueve, agarra y suelta objetos.
+
+CanHold: detecta qué objeto está cerca para agarrar.
+
+PickableObject (SO): almacena datos (nombre, valor).
+
+Pickable: une los datos a los prefabs físicos.
+
+DropZone: elimina objetos y notifica al GameManager.
+
+GameManager: lleva el conteo, el puntaje y la lista de objetos eliminados.
+
+FadeText: muestra mensajes temporales en pantalla.
+
+CameraFollow: cámara que sigue suavemente al jugador.
+
+Spawner: genera objetos aleatorios cada cierto tiempo.
+
+1. Player.cs (Jugador)
+
+Este script controla el movimiento e interacción del jugador:
+
+Movimiento:
+
+El jugador se mueve según la entrada del teclado (WASD o joystick) con la nueva Input System (OnMove).
+
+La dirección se guarda en lastDirection, lo que permite que cuando el jugador deje de moverse, siga mirando hacia la última dirección en la que caminó.
+
+El movimiento se aplica con transform.Translate, y la rotación con Quaternion.Slerp para suavizar el giro.
+
+Interacción con objetos:
+
+Si el jugador presiona la tecla de interacción (OnInteract), el sistema revisa si tiene un objeto en la mano.
+
+Si no tiene → intenta agarrar (PickObject).
+
+Si ya tiene uno → lo suelta (DropObject).
+
+Los objetos recogidos se mantienen pegados a un holdPoint (un objeto vacío hijo del jugador).
+
+Cuando el jugador sostiene un objeto, este se mueve físicamente hacia el holdPoint con una fuerza (MoveObject), para que se vea natural.
+
+
+
+2. PickableObject.cs (Scriptable Object de datos)
+
+Este es un almacenador de datos reutilizable:
+
+Define el nombre (objectName) y el valor (objectValue) de un objeto recogible.
+
+Es un ScriptableObject, por lo que se crean instancias en la carpeta Assets (ejemplo: Botella, Lata, Caja).
+
+Cada prefab de objeto en la escena tendrá un componente Pickable que referencia a uno de estos PickableObject.
+
+Esto permite que diferentes prefabs compartan los mismos datos sin duplicación.
+
+
+🧩 3. Pickable.cs (Vinculación de datos a un prefab)
+
+Este script se adjunta a los prefabs recogibles en la escena:
+
+Contiene una referencia a un PickableObject (el ScriptableObject de datos).
+
+Cuando un objeto entra en la DropZone, el GameManager accede a sus datos (objectName, objectValue).
+
+De esta forma, un mismo prefab físico (ej. "BotellaPrefab") puede tener los datos de un PickableObject ("Botella", valor = 10).
+
+
+🎯 4. CanHold.cs (Detección de objetos cercanos)
+
+Este script detecta si el jugador puede recoger un objeto:
+
+Tiene un OnTriggerEnter que revisa si un objeto con el tag "Pickable" entra en la zona de alcance del jugador.
+
+Guarda una referencia en holdableObject y activa canHold.
+
+El Player.cs consulta estas variables para decidir si puede agarrar un objeto.
+
+
+🗑️ 5. DropZone.cs (Zona de eliminación)
+
+Este script define una zona especial (ejemplo: un contenedor o área de reciclaje):
+
+Cuando un objeto con el tag "Pickable" entra en el OnTriggerEnter, busca el componente Pickable y obtiene su PickableObject.
+
+Llama a gameManager.RegisterDrop(pickable.data) para notificar al GameManager.
+
+Finalmente destruye el objeto físico (Destroy(other.gameObject)).
+
+
+🏆 6. GameManager.cs (Gestión del progreso)
+
+Este script centraliza el conteo y puntuación del juego:
+
+Variables:
+
+score → total de puntos acumulados.
+
+objectCounter → cuántos objetos se eliminaron.
+
+eliminatedObjects → lista de PickableObject eliminados.
+
+UI:
+
+Usa TextMeshProUGUI (textCounter y textScore) para mostrar conteo y puntuación en pantalla.
+
+Referencia a FadeText para mostrar mensajes temporales.
+
+Método principal:
+
+RegisterDrop(PickableObject objData) se llama desde DropZone.
+
+Aumenta el contador y el puntaje según objData.objectValue.
+
+Guarda el objeto en la lista eliminatedObjects.
+
+Llama a fadeText.ShowMessage para mostrar un aviso en pantalla del tipo:
+
+Se eliminó Botella (+10)
+
+
+💬 7. FadeText.cs (Mensajes temporales en pantalla)
+
+Este script controla un texto que aparece y se desvanece:
+
+Usa un TextMeshProUGUI asignado en el Canvas.
+
+Método ShowMessage(string message):
+
+Aparece instantáneamente con alpha = 1.
+
+Permanece visible durante displayTime.
+
+Luego se desvanece suavemente a alpha = 0 en fadeDuration.
+
+Previene superposición cancelando corutinas si ya hay un mensaje activo.
+
+Se usa principalmente para mostrar qué objeto fue eliminado y cuántos puntos sumó.
+
+
+ 8. CameraFollow.cs (Cámara suave)
+
+Este script hace que la cámara siga al jugador:
+
+Usa Vector3.SmoothDamp para interpolar suavemente la posición de la cámara hacia la del jugador más un offset.
+
+El movimiento es más fluido que un Lerp.
+
+Corre en LateUpdate para actualizarse después de que el jugador se haya movido.
+
+
+9. Spawner.cs (Generador de objetos)
+
+Este script instancia objetos recogibles en la escena cada cierto tiempo:
+
+Tiene una lista prefabGameObjects con prefabs configurados en el inspector.
+
+Cada 5 segundos selecciona un prefab al azar con Random.Range y lo instancia en una posición del mundo.
+
+Permite mantener un flujo constante de objetos en el nivel.
+
+
