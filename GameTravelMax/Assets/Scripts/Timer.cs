@@ -1,47 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Temporizador regresivo que se muestra en pantalla.
-/// Al llegar a cero, reinicia el temporizador.
+/// Al llegar a cero, cambia de escena.
 /// </summary>
 public class Timer : MonoBehaviour
 {
     #region Variables
-    /// <summary>
-    /// Referencia al componente de texto que mostrará el tiempo restante.
-    /// </summary>
-    [SerializeField] private TMP_Text timerText;
-
-    /// <summary>
-    /// Tiempo total en segundos que tendrá el temporizador.
-    /// </summary>
+    [SerializeField] private TMP_Text timerText;  // Texto donde se muestra el tiempo
     [SerializeField, Tooltip("Tiempo en segundos")] private float timerTime;
-    
+
     private int minutes, seconds, cents;
-    private float startTime; // Tiempo original para reiniciar
+    private float startTime;
+
+    public bool Pausado { get; set; } = false; // <-- NUEVO: bandera de pausa
     #endregion
 
-    #region Métodos Unity
-    /// <summary>
-    /// Inicializa el temporizador guardando el valor original para futuros reinicios.
-    /// </summary>
     void Start()
     {
-        startTime = timerTime; // Guarda el tiempo inicial
+        startTime = timerTime;
     }
 
-    /// <summary>
-    /// Se llama una vez por frame. Actualiza el temporizador, lo muestra en pantalla y
-    /// ejecuta el respawn del jugador si el tiempo llega a cero.
-    /// </summary>
     void Update()
     {
-        timerTime -= Time.deltaTime;
+        if (Pausado) return; // <-- Si está pausado, no hacer nada
 
+        timerTime -= Time.deltaTime;
         if (timerTime < 0) timerTime = 0;
 
         minutes = (int)(timerTime / 60f);
@@ -50,16 +37,14 @@ public class Timer : MonoBehaviour
 
         timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, cents);
 
-        if (timerTime ==0)
+        if (timerTime == 0)
         {
-            timerTime = startTime; // Reinicia el temporizador
+            SceneManager.LoadScene("FormularioRegistro");
         }
     }
 
     internal float GetRemainingTime()
     {
-       return timerTime;
+        return timerTime;
     }
-    #endregion
-
 }

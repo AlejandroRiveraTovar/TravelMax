@@ -11,6 +11,12 @@ public class DropZone : MonoBehaviour
     [Header("Referencias")]
     [Tooltip("Referencia al GameManager encargado de llevar el conteo y la puntuación.")]
     public GameManager gameManager;
+    private Player player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     /// <summary>
     /// Detecta cuando un objeto entra en el área de la zona de eliminación.
@@ -33,6 +39,8 @@ public class DropZone : MonoBehaviour
 
                 // Eliminamos la instancia de la escena (no el prefab de la lista)
                 Destroy(other.gameObject);
+               
+                
             }
         }
     }

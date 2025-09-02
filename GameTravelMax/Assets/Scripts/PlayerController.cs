@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     private Vector2 move;                           // Entrada de movimiento del jugador
     private Vector3 lastDirection = Vector3.forward; // Última dirección válida (por defecto en +Z)
+    private Animator Animator_Player;
 
     [Header("Interacción")]
     [Tooltip("Distancia máxima para detectar objetos que se pueden agarrar.")]
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
 
     [Tooltip("Fuerza con la que el objeto se acerca al punto de agarre.")]
     public float pickForce = 50f;
+    
 
     private bool canGrab;                           // Indica si hay un objeto disponible para agarrar
 
@@ -44,6 +46,10 @@ public class Player : MonoBehaviour
         move = context.ReadValue<Vector2>();
     }
 
+    private void Start()
+    {
+        Animator_Player = GetComponent<Animator>();
+    }
     private void Update()
     {
         MovePlayer();
@@ -78,6 +84,8 @@ public class Player : MonoBehaviour
 
             // Movimiento en el mundo
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
+            // Inicia animacion de correr
+            Animator_Player.SetBool("Run", true);
         }
         else
         {
@@ -87,6 +95,8 @@ public class Player : MonoBehaviour
                 Quaternion.LookRotation(lastDirection),
                 0.15f
             );
+            // Termina animacion de correr
+            Animator_Player.SetBool("Run", false);
         }
     }
 
@@ -124,6 +134,9 @@ public class Player : MonoBehaviour
 
         rb.transform.parent = holdPoint;
         heldObject = pickObject;
+
+        // Inicia animacion de agarrar
+        Animator_Player.SetBool("Grab", true);
     }
 
     /// <summary>
@@ -145,6 +158,8 @@ public class Player : MonoBehaviour
         }
 
         heldObject = null;
+        // Termina animacion de agarrar
+        Animator_Player.SetBool("Grab", false);
     }
 
     /// <summary>

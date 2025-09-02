@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: b44f3940c4940544a8c2c6aee5fa086f
+AssetOrigin:
+  serializedVersion: 1
+  productId: 143848
+  packageName: '3D Stealth Game: Haunted House'
+  packageVersion: 3.1
+  assetPath: Assets/_3DStealthGame/Art/Models/Characters/Players/JohnLemon_Model.fbx
+  uploadId: 770342
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -340,11 +347,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: Root
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
@@ -354,10 +361,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 143848
-  packageName: '3D Stealth Game: Haunted House'
-  packageVersion: 3.1
-  assetPath: Assets/_3DStealthGame/Art/Models/Characters/Players/JohnLemon_Model.fbx
-  uploadId: 770342
