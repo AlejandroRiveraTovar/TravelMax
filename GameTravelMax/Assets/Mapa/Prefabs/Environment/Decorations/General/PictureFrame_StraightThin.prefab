@@ -12,10 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PictureFrame_StraightThin
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 2de78e17331d71b49bd26432f0301b13, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2de78e17331d71b49bd26432f0301b13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
