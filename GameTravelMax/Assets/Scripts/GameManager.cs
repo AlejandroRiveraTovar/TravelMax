@@ -29,6 +29,22 @@ public class GameManager : MonoBehaviour
     [Tooltip("Lista de ScriptableObjects que representan los objetos eliminados.")]
     public List<PickableObject> eliminatedObjects = new List<PickableObject>();
 
+
+    public static GameManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Prevent duplicate instances
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // Persist across scenes
+    }
+
+
+
     /// <summary>
     /// Actualiza la UI cada frame con los valores actuales de contador y puntuación.
     /// </summary>
