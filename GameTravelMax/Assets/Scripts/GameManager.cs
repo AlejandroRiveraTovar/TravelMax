@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Lista de ScriptableObjects que representan los objetos eliminados.")]
     public List<PickableObject> eliminatedObjects = new List<PickableObject>();
 
+    public GameObject portal;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
