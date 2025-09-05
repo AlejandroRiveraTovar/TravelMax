@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a87cf486dba76b942b0e58799a281e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 8cf51865bca33604bb7319a3b4392f96, type: 2}
+  data: {fileID: 11400000, guid: aa518b15a4b013e4f9d61537528a36d9, type: 2}
   player: {fileID: 0}
   activationDistance: 5
   outlineWidth: 0.05
