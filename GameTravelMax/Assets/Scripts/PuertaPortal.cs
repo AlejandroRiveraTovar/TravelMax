@@ -9,7 +9,7 @@ public class PuertaPortal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Scene2");
+            SceneManager.LoadScene("Ganaste");
         }
     }
 }
