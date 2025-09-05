@@ -39,7 +39,7 @@ public class Timer : MonoBehaviour
 
         if (timerTime == 0)
         {
-            SceneManager.LoadScene("FormularioRegistro");
+            SceneManager.LoadScene("Perdiste");
         }
     }
 
