@@ -1,11 +1,11 @@
-using UnityEngine;
+锘縰sing UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 
 /// <summary>
-/// Controla el movimiento del jugador en un entorno 3D y la interacci髇
+/// Controla el movimiento del jugador en un entorno 3D y la interacci贸n
 /// con objetos "Pickable" (agarrar, soltar y mover con fuerza hacia un punto de agarre).
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour
 {
     [Header("Movimiento")]
@@ -13,14 +13,14 @@ public class Player : MonoBehaviour
     public float speed = 5f;
 
     private Vector2 move;                           // Entrada de movimiento del jugador
-    private Vector3 lastDirection = Vector3.forward; // 趌tima direcci髇 v醠ida (por defecto en +Z)
+    private Vector3 lastDirection = Vector3.forward; // 脷ltima direcci贸n v谩lida (por defecto en +Z)
     private Animator Animator_Player;
 
-    [Header("Interacci髇")]
-    [Tooltip("Distancia m醲ima para detectar objetos que se pueden agarrar.")]
+    [Header("Interacci贸n")]
+    [Tooltip("Distancia m谩xima para detectar objetos que se pueden agarrar.")]
     public float pickDistance = 3f;
 
-    [Tooltip("Script que detecta si hay un objeto en el 醨ea de agarre.")]
+    [Tooltip("Script que detecta si hay un objeto en el 谩rea de agarre.")]
     public CanHold holdPointSC;
 
     [Tooltip("Objeto actualmente en rango para agarrar.")]
@@ -28,15 +28,24 @@ public class Player : MonoBehaviour
 
     [Tooltip("Fuerza con la que el objeto se acerca al punto de agarre.")]
     public float pickForce = 50f;
-    
 
     private bool canGrab;                           // Indica si hay un objeto disponible para agarrar
 
     [SerializeField, Header("Punto de agarre")]
-    [Tooltip("Transform vac韔 donde se coloca el objeto agarrado.")]
+    [Tooltip("Transform vac铆o donde se coloca el objeto agarrado.")]
     private Transform holdPoint;
 
     private GameObject heldObject = null;           // Objeto actualmente agarrado
+
+    [Header("Audio")]
+    [Tooltip("Clip de sonido para pasos al caminar.")]
+    public AudioClip footstepClip;
+
+    [Tooltip("Clip de sonido al recoger un objeto.")]
+    public AudioClip pickClip;
+
+    private AudioSource audioSource;
+    private bool isWalkingSoundPlaying = false;     // Control para evitar solapamiento de pasos
 
     /// <summary>
     /// Lee el input de movimiento proveniente del Input System.
@@ -49,12 +58,14 @@ public class Player : MonoBehaviour
     private void Start()
     {
         Animator_Player = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
+
     private void Update()
     {
         MovePlayer();
 
-        // Actualizamos estado de interacci髇 con objetos
+        // Actualizamos estado de interacci贸n con objetos
         canGrab = holdPointSC.canHold;
         holdableObj = holdPointSC.holdableObject;
 
@@ -65,7 +76,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Mueve al jugador seg鷑 la entrada y mantiene la 鷏tima direcci髇 de rotaci髇.
+    /// Mueve al jugador seg煤n la entrada y mantiene la 煤ltima direcci贸n de rotaci贸n.
     /// </summary>
     private void MovePlayer()
     {
@@ -73,9 +84,9 @@ public class Player : MonoBehaviour
 
         if (movement.magnitude > 0.01f) // Si hay movimiento
         {
-            lastDirection = movement; // Actualizamos la 鷏tima direcci髇 v醠ida
+            lastDirection = movement; // Actualizamos la 煤ltima direcci贸n v谩lida
 
-            // Rotaci髇 hacia la direcci髇 de movimiento
+            // Rotaci贸n hacia la direcci贸n de movimiento
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(lastDirection),
@@ -84,24 +95,25 @@ public class Player : MonoBehaviour
 
             // Movimiento en el mundo
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
-            // Inicia animacion de correr
             Animator_Player.SetBool("Run", true);
+
+            PlayFootstepSound();
         }
         else
         {
-            // Si no hay movimiento, mantenemos la 鷏tima rotaci髇
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(lastDirection),
                 0.15f
             );
-            // Termina animacion de correr
             Animator_Player.SetBool("Run", false);
+
+            StopFootstepSound();
         }
     }
 
     /// <summary>
-    /// Acci髇 de interacci髇 (Input System).
+    /// Acci贸n de interacci贸n (Input System).
     /// Agarra un objeto disponible o suelta el objeto actual.
     /// </summary>
     public void OnInteract(InputAction.CallbackContext context)
@@ -135,12 +147,17 @@ public class Player : MonoBehaviour
         rb.transform.parent = holdPoint;
         heldObject = pickObject;
 
-        // Inicia animacion de agarrar
         Animator_Player.SetBool("Grab", true);
+
+        //  Sonido de recoger objeto
+        if (pickClip != null)
+        {
+            audioSource.PlayOneShot(pickClip);
+        }
     }
 
     /// <summary>
-    /// Suelta el objeto actualmente agarrado y restaura sus propiedades f韘icas.
+    /// Suelta el objeto actualmente agarrado y restaura sus propiedades f铆sicas.
     /// </summary>
     private void DropObject()
     {
@@ -158,7 +175,6 @@ public class Player : MonoBehaviour
         }
 
         heldObject = null;
-        // Termina animacion de agarrar
         Animator_Player.SetBool("Grab", false);
     }
 
@@ -171,6 +187,32 @@ public class Player : MonoBehaviour
         {
             Vector3 direction = (holdPoint.position - heldObject.transform.position);
             heldObject.GetComponent<Rigidbody>().AddForce(direction * pickForce);
+        }
+    }
+
+    /// <summary>
+    /// Reproduce el sonido de pasos mientras el jugador camina.
+    /// </summary>
+    private void PlayFootstepSound()
+    {
+        if (footstepClip != null && !isWalkingSoundPlaying)
+        {
+            audioSource.clip = footstepClip;
+            audioSource.loop = true;
+            audioSource.Play();
+            isWalkingSoundPlaying = true;
+        }
+    }
+
+    /// <summary>
+    /// Detiene el sonido de pasos cuando el jugador deja de caminar.
+    /// </summary>
+    private void StopFootstepSound()
+    {
+        if (isWalkingSoundPlaying)
+        {
+            audioSource.Stop();
+            isWalkingSoundPlaying = false;
         }
     }
 }

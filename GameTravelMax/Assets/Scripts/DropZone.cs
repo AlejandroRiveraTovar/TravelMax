@@ -12,7 +12,7 @@ public class DropZone : MonoBehaviour
     [Tooltip("Referencia al GameManager encargado de llevar el conteo y la puntuación.")]
     public GameManager gameManager;
     private Player player;
-
+    public AudioSource clip;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -36,7 +36,7 @@ public class DropZone : MonoBehaviour
             {
                 // Enviamos los datos al GameManager para registrar el objeto eliminado
                 gameManager.RegisterDrop(pickable.data);
-
+                clip.Play();
                 // Eliminamos la instancia de la escena (no el prefab de la lista)
                 Destroy(other.gameObject);
                

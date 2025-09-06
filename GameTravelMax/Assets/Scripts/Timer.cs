@@ -11,11 +11,11 @@ public class Timer : MonoBehaviour
 {
     #region Variables
     [SerializeField] private TMP_Text timerText;  // Texto donde se muestra el tiempo
-    [SerializeField, Tooltip("Tiempo en segundos")] private float timerTime;
+    [SerializeField, Tooltip("Tiempo en segundos")] public float timerTime = 45f;
 
     private int minutes, seconds, cents;
     private float startTime;
-
+    [SerializeField] private GameManager gameManager;
     public bool Pausado { get; set; } = false; // <-- NUEVO: bandera de pausa
     #endregion
 
@@ -39,6 +39,7 @@ public class Timer : MonoBehaviour
 
         if (timerTime == 0)
         {
+            gameManager.score -= 100;
             SceneManager.LoadScene("Perdiste");
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3301451990264634832}
   - component: {fileID: 3710062520830495311}
   - component: {fileID: 2092768578547420099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +100,7 @@ GameObject:
   - component: {fileID: 6817691413158715329}
   - component: {fileID: 6627653234694044618}
   - component: {fileID: 808492083585456644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Saw
   m_TagString: Pickable
   m_Icon: {fileID: 0}

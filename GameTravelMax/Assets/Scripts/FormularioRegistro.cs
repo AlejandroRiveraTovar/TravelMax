@@ -10,6 +10,10 @@ public class FormularioRegistro : MonoBehaviour
     public TMP_InputField inputEmail;
     public TMP_InputField inputEdad;
     public TMP_InputField inputCiudad;
+    public TMP_Text scoreText;
+
+    [Header("GameManager")]
+    public GameManager gameManager;
 
     [System.Serializable]
     public class DatosUsuario
@@ -18,6 +22,7 @@ public class FormularioRegistro : MonoBehaviour
         public string email;
         public int edad;
         public string ciudad;
+        public int score;
     }
 
     [System.Serializable]
@@ -33,6 +38,8 @@ public class FormularioRegistro : MonoBehaviour
     {
         ruta = Path.Combine(Application.persistentDataPath, "usuarios.json");
         CargarJSON();
+        gameManager = FindFirstObjectByType<GameManager>();
+        scoreText.text = gameManager.score.ToString();
     }
 
     public void EnviarFormulario()
@@ -48,13 +55,13 @@ public class FormularioRegistro : MonoBehaviour
             nuevoUsuario.edad = 0;
 
         nuevoUsuario.ciudad = inputCiudad.text;
-
+        nuevoUsuario.score = gameManager.score;
         // Agregar a la lista
         lista.usuarios.Add(nuevoUsuario);
 
         // Guardar en JSON
         GuardarJSON();
-
+        
         Debug.Log("Usuario agregado y guardado: " + JsonUtility.ToJson(nuevoUsuario, true));
     }
 

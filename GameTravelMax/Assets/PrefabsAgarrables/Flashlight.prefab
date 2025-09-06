@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3167602885369449277}
   - component: {fileID: 4782290588705321286}
   - component: {fileID: 7554453307148658869}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flashlight
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3160847772406945742}
   - component: {fileID: 3154167125669140065}
   - component: {fileID: 5229178505294180382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

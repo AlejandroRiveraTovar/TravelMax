@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7844083987509887558}
   - component: {fileID: 2479485845678967276}
   - component: {fileID: 9183684412180305139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BookRed
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8710541877950916357}
   - component: {fileID: 6453725726985117740}
   - component: {fileID: 1353454027952928663}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BookRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

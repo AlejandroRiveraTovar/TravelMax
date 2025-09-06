@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1316741155465195513}
   - component: {fileID: 8424649447830435687}
   - component: {fileID: 4074322585136066821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottle3
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3656777820783011185}
   - component: {fileID: 6020585373811034379}
   - component: {fileID: 611673917279408572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bottle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

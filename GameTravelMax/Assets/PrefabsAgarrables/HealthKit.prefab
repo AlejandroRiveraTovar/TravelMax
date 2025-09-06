@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7566703825110392526}
   - component: {fileID: 7231928926781823223}
   - component: {fileID: 1937238151356867433}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +100,7 @@ GameObject:
   - component: {fileID: 3926104983404802338}
   - component: {fileID: 4064060566737957565}
   - component: {fileID: 3575850954754158204}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthKit
   m_TagString: Pickable
   m_Icon: {fileID: 0}

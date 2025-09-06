@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1098568635147389679}
   - component: {fileID: 5118026381591279393}
   - component: {fileID: 7190307165821832486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plate_001
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8383931384400262284}
   - component: {fileID: 1845061909652247948}
   - component: {fileID: 4081440320134359700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plate_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

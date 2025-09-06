@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6378626505978161376}
   - component: {fileID: 2797951768406645477}
   - component: {fileID: 6161861349425977656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TapeMeasurer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +100,7 @@ GameObject:
   - component: {fileID: 4919209464518288627}
   - component: {fileID: 6048705234706447875}
   - component: {fileID: 2871965969969266185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TapeMeasurer
   m_TagString: Pickable
   m_Icon: {fileID: 0}

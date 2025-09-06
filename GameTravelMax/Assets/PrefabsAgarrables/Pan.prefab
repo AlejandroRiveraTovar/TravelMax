@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4569948871785459002}
   - component: {fileID: 2138426676460223919}
   - component: {fileID: 1804435111194602157}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pan
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 1567454670440827866}
   - component: {fileID: 2884752402880200816}
   - component: {fileID: 3336152598261318356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

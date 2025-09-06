@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7661456472425151794}
   - component: {fileID: 2523056238280944487}
   - component: {fileID: 4870742561893007985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 2820180603042024562}
   - component: {fileID: 1178395144789129299}
   - component: {fileID: 4032906978395467479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TutorialBox : MonoBehaviour
 {
@@ -12,20 +13,19 @@ public class TutorialBox : MonoBehaviour
     [SerializeField] private string[] mensajes;
     [SerializeField] private KeyCode teclaAvanzar = KeyCode.Space;
     [SerializeField] private float velocidadEscritura = 0.05f;
-
+    public List<GameObject> walls;
     private int indiceActual = 0;
     private bool escribiendo = false;
     private Timer timer; // <-- referencia al temporizador
 
-    [Header("Controles de jugador")]
-    public Player player;
+    
 
     private void Start()
     {
         // Buscar el Timer en la escena
         timer = FindFirstObjectByType<Timer>();
         // Pausa el movimiento del jugador 
-        player.enabled = false;
+        
         if (timer != null) timer.Pausado = true; // Pausar al inicio del tutorial
 
         if (mensajes.Length > 0)
@@ -68,7 +68,7 @@ public class TutorialBox : MonoBehaviour
         else
         {
             panelTutorial.gameObject.SetActive(false);
-            if (timer != null) timer.Pausado = false; player.enabled = true; // Reanudar cuando acaben los mensajes
+            if (timer != null) timer.Pausado = false; for (int i = 0; i < walls.Count; i++) { walls[i].SetActive(false); };  // Reanudar cuando acaben los mensajes
         }
     }
 

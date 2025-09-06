@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3363208741305557327}
   - component: {fileID: 2851165203678068827}
   - component: {fileID: 3827724571126613019}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dumbell1
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 2266795971595297154}
   - component: {fileID: 4573162632471095040}
   - component: {fileID: 8462479011498924430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dumbell1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

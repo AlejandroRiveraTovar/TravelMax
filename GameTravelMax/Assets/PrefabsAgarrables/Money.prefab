@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6834262423012490321}
   - component: {fileID: 5959042867285240335}
   - component: {fileID: 8147668867364209418}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Money
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8703072738880186750}
   - component: {fileID: 2108179609496670529}
   - component: {fileID: 3382890843870814453}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

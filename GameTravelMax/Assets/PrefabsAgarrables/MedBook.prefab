@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6966739767582015890}
   - component: {fileID: 775285789368930936}
   - component: {fileID: 5485881682139435156}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MedBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,8 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +100,7 @@ GameObject:
   - component: {fileID: 4571602216214282044}
   - component: {fileID: 8685512276769348370}
   - component: {fileID: 9185620858069688681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MedBook
   m_TagString: Pickable
   m_Icon: {fileID: 0}
