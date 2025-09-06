@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Necesario para detectar cambio de escenas
 
 /// <summary>
 /// Controlador principal del juego.
@@ -15,64 +16,65 @@ public class GameManager : MonoBehaviour
     [Tooltip("Cantidad total de objetos eliminados.")]
     public int objectCounter;
 
-    [Header("Referencias de UI")]
-    [Tooltip("Texto de la UI que muestra la cantidad de objetos eliminados.")]
-    public TMPro.TextMeshProUGUI textCounter;
-
-    [Tooltip("Texto de la UI que muestra la puntuación acumulada.")]
-    public TMPro.TextMeshProUGUI textScore;
-
-    [Tooltip("Referencia al script encargado de mostrar mensajes desvanecientes en pantalla.")]
-    public FadeText fadeText;
-
     [Header("Inventario de objetos eliminados")]
     [Tooltip("Lista de ScriptableObjects que representan los objetos eliminados.")]
     public List<PickableObject> eliminatedObjects = new List<PickableObject>();
 
-    public GameObject portal;
+    public int score_tiempoSobra;
 
     public static GameManager Instance { get; private set; }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); // Prevent duplicate instances
+            Destroy(gameObject); // Evitar instancias duplicadas
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Persist across scenes
+        DontDestroyOnLoad(gameObject); // Persistir entre escenas
+
+        // Suscribirse al evento de cambio de escena
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-
+    private void OnDestroy()
+    {
+        // Evitar errores al destruir la instancia
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     /// <summary>
-    /// Actualiza la UI cada frame con los valores actuales de contador y puntuación.
+    /// Evento que se llama cada vez que se carga una nueva escena.
     /// </summary>
-    private void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        textCounter.text = objectCounter.ToString();
-        textScore.text = score.ToString();
+        if (scene.name == "MenuInicio")
+        {
+            ResetStats();
+        }
+    }
+
+    /// <summary>
+    /// Reinicia las estadísticas y listas del GameManager.
+    /// </summary>
+    private void ResetStats()
+    {
+        score = 0;
+        objectCounter = 0;
+        score_tiempoSobra = 0;
+        eliminatedObjects.Clear();
     }
 
     /// <summary>
     /// Registra un objeto eliminado en la zona de DropZone.
     /// </summary>
     /// <param name="objData">Datos del objeto eliminado (nombre y valor) provenientes de su ScriptableObject.</param>
-    /// <remarks>
-    /// - Incrementa el contador de objetos.  
-    /// - Suma su valor a la puntuación total.  
-    /// - Guarda el objeto en la lista de eliminados.  
-    /// - Muestra un mensaje temporal en pantalla si se asignó <see cref="fadeText"/>.  
-    /// </remarks>
     public void RegisterDrop(PickableObject objData)
     {
         objectCounter++;
         score += objData.objectValue;
         eliminatedObjects.Add(objData);
-
-        // Mostrar mensaje en pantalla con fade-out
-        if (fadeText != null)
-            fadeText.ShowMessage($"Se eliminó {objData.objectName} (+{objData.objectValue})");
     }
 }

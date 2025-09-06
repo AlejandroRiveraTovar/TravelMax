@@ -22,6 +22,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         startTime = timerTime;
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
     }
 
     void Update()

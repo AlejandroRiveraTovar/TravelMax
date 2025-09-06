@@ -13,9 +13,14 @@ public class DropZone : MonoBehaviour
     public GameManager gameManager;
     private Player player;
     public AudioSource clip;
+
+    [Tooltip("Referencia al script encargado de mostrar mensajes desvanecientes en pantalla.")]
+    public FadeText fadeText;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
     }
 
     /// <summary>
@@ -37,6 +42,8 @@ public class DropZone : MonoBehaviour
                 // Enviamos los datos al GameManager para registrar el objeto eliminado
                 gameManager.RegisterDrop(pickable.data);
                 clip.Play();
+                if (fadeText != null)
+                    fadeText.ShowMessage($"Se eliminó {pickable.data.objectName} (+{pickable.data.objectValue})");
                 // Eliminamos la instancia de la escena (no el prefab de la lista)
                 Destroy(other.gameObject);
                

@@ -997,7 +997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -42.81067}
+  m_AnchoredPosition: {x: -38, y: -42.81067}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &160841179
@@ -6235,11 +6235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   objectCounter: 0
-  textCounter: {fileID: 1252047574}
-  textScore: {fileID: 159973740}
-  fadeText: {fileID: 63586143}
   eliminatedObjects: []
-  portal: {fileID: 1309944628}
+  score_tiempoSobra: 0
 --- !u!4 &948888403
 Transform:
   m_ObjectHideFlags: 0
@@ -13176,6 +13173,7 @@ GameObject:
   - component: {fileID: 1914224951}
   - component: {fileID: 1914224950}
   - component: {fileID: 1914224949}
+  - component: {fileID: 1914224952}
   m_Layer: 0
   m_Name: ----GameController----
   m_TagString: Untagged
@@ -13239,6 +13237,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914224952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914224948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf3c80ea97174b488cf69c11a151686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textCounter: {fileID: 1252047574}
+  textScore: {fileID: 159973740}
 --- !u!1001 &1935635007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14297,6 +14309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 948888402}
   clip: {fileID: 2048308659}
+  fadeText: {fileID: 63586143}
 --- !u!82 &2048308659
 AudioSource:
   m_ObjectHideFlags: 0
